@@ -22,6 +22,12 @@ class AssignmentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Master Schedules';
+
+    protected static ?string $slug = 'master-schedules';
+
+    protected static ?string $breadcrumb = 'master-schedules';
+
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema

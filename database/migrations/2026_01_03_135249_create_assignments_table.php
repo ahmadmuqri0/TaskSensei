@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('filepath');
             $table->dateTimeTz('starts_at');
             $table->dateTimeTz('ends_at');
-            $table->json('subtask');
             $table->string('priority')->default('low');
             $table->string('status')->default('ongoing');
             $table->foreignId('user_id')->constrained(User::class)->cascadeOnUpdate()->cascadeOnDelete();

@@ -4,3 +4,11 @@
 @source '../../../../resources/views/filament/**/*';
 @source '../../../../vendor/guava/calendar/resources/**/*';
 @import '../../../../vendor/guava/calendar/resources/css/theme.css';
+
+.fi-sidebar {
+    @apply bg-white dark:bg-gray-900 border-r-gray-200 dark:border-r-gray-800 border-r
+}
+
+.fi-user-menu-trigger {
+    @apply bg-gray-100 dark:bg-gray-800
+}

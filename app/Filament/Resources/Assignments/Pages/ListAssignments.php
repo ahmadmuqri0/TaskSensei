@@ -10,10 +10,10 @@ class ListAssignments extends ListRecords
 {
     protected static string $resource = AssignmentResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    // protected function getHeaderActions(): array
+    // {
+    //     return [
+    //         CreateAction::make(),
+    //     ];
+    // }
 }
