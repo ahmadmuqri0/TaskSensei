@@ -1,36 +1,37 @@
 <?php
 
-namespace App\Filament\Resources\Assignments\Tables;
+namespace App\Filament\Resources\Assignments\Resources\Tasks\Tables;
 
-use App\Models\Task;
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\Layout\Panel;
-use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
-class AssignmentsTable
+class TasksTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
+                TextColumn::make('order')->label('No')->numeric()->sortable(),
                 TextColumn::make('title')->searchable(),
-                TextColumn::make('starts_at')->dateTime()->sortable(),
-                TextColumn::make('ends_at')->dateTime()->sortable(),
-                TextColumn::make('priority')->searchable()->badge(),
-                TextColumn::make('status')->searchable(),
+                TextColumn::make('description')->searchable()->limit(80),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
+                ViewAction::make()->modal()->label('')->icon(''),
                 EditAction::make(),
             ])
             ->toolbarActions([

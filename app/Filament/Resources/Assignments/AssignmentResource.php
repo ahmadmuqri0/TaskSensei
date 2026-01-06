@@ -6,6 +6,7 @@ use App\Filament\Resources\Assignments\Pages\CreateAssignment;
 use App\Filament\Resources\Assignments\Pages\EditAssignment;
 use App\Filament\Resources\Assignments\Pages\ListAssignments;
 use App\Filament\Resources\Assignments\Pages\ViewAssignment;
+use App\Filament\Resources\Assignments\RelationManagers\TasksRelationManager;
 use App\Filament\Resources\Assignments\Schemas\AssignmentForm;
 use App\Filament\Resources\Assignments\Schemas\AssignmentInfolist;
 use App\Filament\Resources\Assignments\Tables\AssignmentsTable;
@@ -48,7 +49,7 @@ class AssignmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TasksRelationManager::class
         ];
     }
 

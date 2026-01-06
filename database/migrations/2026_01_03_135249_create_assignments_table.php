@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('filename');
             $table->string('filepath');
-            $table->dateTimeTz('starts_at');
-            $table->dateTimeTz('ends_at');
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
             $table->string('priority')->default('low');
             $table->string('status')->default('ongoing');
-            $table->foreignId('user_id')->constrained(User::class)->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

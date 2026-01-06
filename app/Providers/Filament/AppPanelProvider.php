@@ -30,12 +30,13 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('')
             ->spa(hasPrefetching: true)
-            ->databaseTransactions()
+            // ->databaseTransactions()
             ->sidebarCollapsibleOnDesktop()
+            ->globalSearch(false)
             ->topbar(false)
             ->viteTheme('resources/css/filament/app/theme.css')
             ->login()
-            ->userMenu(position: UserMenuPosition::Sidebar)
+            ->registration()
             ->colors([
                 'primary' => Color::adaptive(
                     lightColor: FilamentColor::Amber,

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->foreignId('assignment_id')->constrained(Assignment::class)->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('order');
+            $table->foreignId('assignment_id')->constrained('assignments')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

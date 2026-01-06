@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CalendarWidget extends GuavaCalendarWidget
 {
-    // protected string|int|array $columnSpan = 2;
+    protected bool $eventClickEnabled = true;
 
     protected function getEvents(FetchInfo $info): Collection|array|Builder
     {

@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function assigments(): HasMany
+    public function assignments(): HasMany
     {
         return $this->hasMany(Assignment::class);
     }
