@@ -34,7 +34,7 @@ final class Assignment extends Model implements Eventable
             ->end($this->ends_at);
     }
 
-    public function casts(): array
+    protected function casts(): array
     {
         return [
             'priority' => Priority::class,

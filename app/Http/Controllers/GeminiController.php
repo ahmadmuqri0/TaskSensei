@@ -54,7 +54,7 @@ final class GeminiController extends Controller
 
             // Update assignment with extracted data
             $assignment->update([
-                'ends_at' => isset($data['deadline']) ? $data['deadline'] : now()->addWeek(),
+                'ends_at' => $data['deadline'] ?? now()->addWeek(),
                 'priority' => $data['priority'] ?? 'medium',
             ]);
 
@@ -68,7 +68,7 @@ final class GeminiController extends Controller
                 ]);
             }
 
-            Log::info("Assignment {$assignment->id} analyzed successfully", [
+            Log::info(sprintf('Assignment %s analyzed successfully', $assignment->id), [
                 'tasks_count' => count($data['tasks']),
                 'deadline' => $data['deadline'] ?? null,
             ]);
@@ -80,7 +80,7 @@ final class GeminiController extends Controller
                 'assignment' => $assignment->load('tasks'),
                 'message' => 'Assignment created and analyzed successfully',
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
 
             DB::rollBack();
 
@@ -91,12 +91,12 @@ final class GeminiController extends Controller
 
             Log::error('Gemini Analysis Error', [
                 'assignment_id' => $assignment->id,
-                'error' => $e->getMessage(),
+                'error' => $exception->getMessage(),
             ]);
 
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to analyze document: '.$e->getMessage(),
+                'message' => 'Failed to analyze document: '.$exception->getMessage(),
             ], 500);
         }
     }

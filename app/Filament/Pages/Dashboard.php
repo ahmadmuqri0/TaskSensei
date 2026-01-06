@@ -27,7 +27,7 @@ final class Dashboard extends Page implements HasForms
 
     protected string $view = 'filament.pages.dashboard';
 
-    public function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('upload')
@@ -77,7 +77,7 @@ final class Dashboard extends Page implements HasForms
         ];
     }
 
-    public function getHeaderWidgets(): array
+    protected function getHeaderWidgets(): array
     {
         return [
             CalendarWidget::class,
