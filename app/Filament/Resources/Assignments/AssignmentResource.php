@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Assignments;
 
 use App\Filament\Resources\Assignments\Pages\CreateAssignment;
@@ -17,7 +19,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class AssignmentResource extends Resource
+final class AssignmentResource extends Resource
 {
     protected static ?string $model = Assignment::class;
 
@@ -49,7 +51,7 @@ class AssignmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TasksRelationManager::class
+            TasksRelationManager::class,
         ];
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Assignments\RelationManagers;
 
 use App\Filament\Resources\Assignments\Resources\Tasks\TaskResource;
@@ -7,7 +9,7 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 
-class TasksRelationManager extends RelationManager
+final class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
 

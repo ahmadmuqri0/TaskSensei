@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\CalendarWidget;
-use App\Jobs\AnalyzeAssignmentJob;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -12,12 +13,11 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class Dashboard extends Page implements HasForms
+final class Dashboard extends Page implements HasForms
 {
     use InteractsWithForms;
 
@@ -42,7 +42,7 @@ class Dashboard extends Page implements HasForms
                         ->directory('attachments')
                         ->visibility('public')
                         ->storeFileNamesIn('filename')
-                        ->acceptedFileTypes(['application/pdf'])
+                        ->acceptedFileTypes(['application/pdf']),
                 ])
                 ->action(function (array $data): void {
                     $fullPath = Storage::disk('public')->path($data['filepath']);
@@ -63,7 +63,7 @@ class Dashboard extends Page implements HasForms
                     if ($result->success) {
                         Notification::make()
                             ->title('Assignment Created')
-                            ->body('Document analyzed successfully with ' . count($result->assignment->tasks) . ' tasks extracted.')
+                            ->body('Document analyzed successfully with '.count($result->assignment->tasks).' tasks extracted.')
                             ->success()
                             ->send();
                     } else {

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Assignments\Resources\Tasks\Pages;
 
 use App\Filament\Resources\Assignments\Resources\Tasks\TaskResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewTask extends ViewRecord
+final class ViewTask extends ViewRecord
 {
     protected static string $resource = TaskResource::class;
 

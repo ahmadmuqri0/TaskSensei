@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Widgets;
 
 use App\Models\Assignment;
-use \Guava\Calendar\Filament\CalendarWidget as GuavaCalendarWidget;
+use Guava\Calendar\Filament\CalendarWidget as GuavaCalendarWidget;
 use Guava\Calendar\ValueObjects\FetchInfo;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
-class CalendarWidget extends GuavaCalendarWidget
+final class CalendarWidget extends GuavaCalendarWidget
 {
     protected bool $eventClickEnabled = true;
 

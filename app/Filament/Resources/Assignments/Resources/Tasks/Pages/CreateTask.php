@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Assignments\Resources\Tasks\Pages;
 
 use App\Filament\Resources\Assignments\Resources\Tasks\TaskResource;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateTask extends CreateRecord
+final class CreateTask extends CreateRecord
 {
     protected static string $resource = TaskResource::class;
 }

@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Task;
+use Exception;
 use Gemini\Data\Blob;
 use Gemini\Enums\MimeType;
 use Gemini\Laravel\Facades\Gemini;
@@ -12,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class GeminiController extends Controller
+final class GeminiController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -75,9 +78,9 @@ class GeminiController extends Controller
             return response()->json([
                 'success' => true,
                 'assignment' => $assignment->load('tasks'),
-                'message' => 'Assignment created and analyzed successfully'
+                'message' => 'Assignment created and analyzed successfully',
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             DB::rollBack();
 
@@ -93,14 +96,14 @@ class GeminiController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to analyze document: ' . $e->getMessage()
+                'message' => 'Failed to analyze document: '.$e->getMessage(),
             ], 500);
         }
     }
 
     private function buildPrompt(): string
     {
-        return <<<PROMPT
+        return <<<'PROMPT'
         You are an AI assistant that analyzes academic assignment documents and extracts structured information.
         Analyze this assignment document and extract the following information in JSON format:
 
@@ -145,22 +148,23 @@ class GeminiController extends Controller
             - Return ONLY the JSON, no additional text or markdown formatting.
         PROMPT;
     }
+
     private function parseResponse(string $response): array
     {
         // Remove markdown code blocks if present
         $cleaned = preg_replace('/```json\s*|\s*```/', '', $response);
-        $cleaned = trim($cleaned);
+        $cleaned = mb_trim($cleaned);
 
         // Try to parse JSON
         $data = json_decode($cleaned, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Invalid JSON response from Gemini: ' . json_last_error_msg() . "\n\nResponse: " . $response);
+            throw new Exception('Invalid JSON response from Gemini: '.json_last_error_msg()."\n\nResponse: ".$response);
         }
 
         // Validate required fields
-        if (!isset($data['tasks']) || !is_array($data['tasks'])) {
-            throw new \Exception('Invalid response structure: missing tasks array');
+        if (! isset($data['tasks']) || ! is_array($data['tasks'])) {
+            throw new Exception('Invalid response structure: missing tasks array');
         }
 
         return $data;

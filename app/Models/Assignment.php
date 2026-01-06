@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Enums\Priority;
 use Guava\Calendar\Contracts\Eventable;
 use Guava\Calendar\ValueObjects\CalendarEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Enums\Priority;
 
-class Assignment extends Model implements Eventable
+final class Assignment extends Model implements Eventable
 {
     protected $fillable = [
         'title',
@@ -19,7 +21,7 @@ class Assignment extends Model implements Eventable
         'ends_at',
         'priority',
         'status',
-        'user_id'
+        'user_id',
     ];
 
     // This is where you map your model into a calendar object

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Assignments\Resources\Tasks;
 
 use App\Filament\Resources\Assignments\AssignmentResource;
@@ -16,7 +18,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class TaskResource extends Resource
+final class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
 
