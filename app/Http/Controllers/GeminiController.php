@@ -30,7 +30,7 @@ final class GeminiController extends Controller
             'filename' => $request->filename,
             'filepath' => $request->filepath,
             'starts_at' => now(),
-            'ends_at' => now()->addWeek(), // Default, will be updated
+            'ends_at' => now()->addWeek(),
             'user_id' => $request->user_id,
         ]);
 
@@ -51,6 +51,8 @@ final class GeminiController extends Controller
 
             // Parse response
             $data = $this->parseResponse($response->text());
+
+            // dd($data);
 
             // Update assignment with extracted data
             $assignment->update([
@@ -96,7 +98,7 @@ final class GeminiController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to analyze document: '.$exception->getMessage(),
+                'message' => 'Failed to analyze document: ' . $exception->getMessage(),
             ], 500);
         }
     }
@@ -117,7 +119,7 @@ final class GeminiController extends Controller
         {
             "deadline": "2025-12-27",
             "submission_method": "Google Classroom",
-            "priority": "high",
+            "priority": 3,
             "tasks": [
                 {
                     "title": "Create database and table",
@@ -143,7 +145,7 @@ final class GeminiController extends Controller
             - Each task should have a clear, concise title and detailed description
             - Maintain the original order of tasks
             - If deadline contains relative date like "today" or "next week", convert to actual date based on document context, if not explicitly stated, set to null.
-            - Set priority as "high", "medium", "low" based on the context.
+            - Set priority as 1-3, each respectively represents 'low', 'medium' and 'high' based on the context.
             - Include sub-requirements as part of the task description (like the bullet points under "Create JSP pages").
             - Return ONLY the JSON, no additional text or markdown formatting.
         PROMPT;
@@ -159,7 +161,7 @@ final class GeminiController extends Controller
         $data = json_decode($cleaned, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception('Invalid JSON response from Gemini: '.json_last_error_msg()."\n\nResponse: ".$response);
+            throw new Exception('Invalid JSON response from Gemini: ' . json_last_error_msg() . "\n\nResponse: " . $response);
         }
 
         // Validate required fields

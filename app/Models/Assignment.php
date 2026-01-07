@@ -20,7 +20,7 @@ final class Assignment extends Model implements Eventable
         'starts_at',
         'ends_at',
         'priority',
-        'status',
+        'is_done',
         'user_id',
     ];
 
@@ -34,13 +34,6 @@ final class Assignment extends Model implements Eventable
             ->end($this->ends_at);
     }
 
-    protected function casts(): array
-    {
-        return [
-            'priority' => Priority::class,
-        ];
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -49,5 +42,12 @@ final class Assignment extends Model implements Eventable
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'priority' => Priority::class,
+        ];
     }
 }

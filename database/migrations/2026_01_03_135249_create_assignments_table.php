@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('filepath');
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
-            $table->string('priority')->default('low');
-            $table->string('status')->default('ongoing');
+            $table->integer('priority')->default(1);
+            $table->boolean('is_done')->default('false');
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });

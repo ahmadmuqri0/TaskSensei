@@ -8,11 +8,11 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\Support\Htmlable;
 
-enum Priority: string implements HasColor, HasLabel
+enum Priority: int implements HasColor, HasLabel
 {
-    case LOW = 'low';
-    case MEDIUM = 'medium';
-    case HIGH = 'high';
+    case LOW = 1;
+    case MEDIUM = 2;
+    case HIGH = 3;
 
     public function getLabel(): string|Htmlable|null
     {

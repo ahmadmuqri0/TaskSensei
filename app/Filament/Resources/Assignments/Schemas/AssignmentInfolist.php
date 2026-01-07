@@ -18,9 +18,8 @@ final class AssignmentInfolist
                 TextEntry::make('starts_at')->dateTime(),
                 TextEntry::make('ends_at')->dateTime(),
                 TextEntry::make('priority')->badge(),
-                TextEntry::make('status')->badge(),
-                TextEntry::make('created_at')->dateTime()->placeholder('-'),
-                TextEntry::make('updated_at')->dateTime()->placeholder('-'),
+                // TextEntry::make('created_at')->dateTime()->placeholder('-'),
+                // TextEntry::make('updated_at')->dateTime()->placeholder('-'),
             ]);
     }
 }
