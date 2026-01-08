@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Assignments\Tables;
 
-use Filament\Actions\Action;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
 final class AssignmentsTable
@@ -23,15 +24,23 @@ final class AssignmentsTable
                 TextColumn::make('priority')->searchable()->badge()->sortable(),
             ])
             ->filters([
-                //
+                TrashedFilter::make()
+                    ->label('Finished tasks')
+                    ->trueLabel('With finished tasks')
+                    ->falseLabel('Finished tasks only')
+                    ->placeholder('Without finished tasks')
             ])
             ->recordActions([
-                ViewAction::make(),
+                ViewAction::make()->label('')->icon(''),
+                DeleteAction::make()
+                    ->label('Done')
+                    ->icon('heroicon-o-check')
+                    ->color('success')
+                    ->modalHeading('Mark As Done')
+                    ->modalIcon('heroicon-s-check-circle')
+                    ->modalSubmitActionLabel('Sure'),
+                RestoreAction::make(),
                 EditAction::make(),
-                // Action::make('Done')
-                //     ->schema([
-                //         Checkbox::make('is_done')->label('Done')
-                //     ])
             ])
             ->toolbarActions([
                 // BulkActionGroup::make([

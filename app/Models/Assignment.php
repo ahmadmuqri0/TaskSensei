@@ -10,9 +10,12 @@ use Guava\Calendar\ValueObjects\CalendarEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Assignment extends Model implements Eventable
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'title',
         'filename',

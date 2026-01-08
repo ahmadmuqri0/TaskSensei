@@ -17,6 +17,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 final class TaskResource extends Resource
 {
@@ -53,9 +55,17 @@ final class TaskResource extends Resource
     public static function getPages(): array
     {
         return [
-            'create' => CreateTask::route('/create'),
-            'edit' => EditTask::route('/{record}/edit'),
+            // 'create' => CreateTask::route('/create'),
+            // 'edit' => EditTask::route('/{record}/edit'),
             // 'view' => ViewTask::route('/{record}'),
         ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

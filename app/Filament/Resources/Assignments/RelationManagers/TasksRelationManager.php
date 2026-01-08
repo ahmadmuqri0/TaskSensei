@@ -19,7 +19,12 @@ final class TasksRelationManager extends RelationManager
     {
         return $table
             ->headerActions([
-                CreateAction::make(),
+                // CreateAction::make(),
             ]);
+    }
+
+    public function isReadOnly(): bool
+    {
+        return false;
     }
 }
