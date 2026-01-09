@@ -30,7 +30,7 @@ final class GeminiController extends Controller
             'filename' => $request->filename,
             'filepath' => $request->filepath,
             'starts_at' => now(),
-            'ends_at' => now()->addWeek(),
+            'ends_at' => today()->addWeek(),
             'user_id' => $request->user_id,
         ]);
 
@@ -56,7 +56,7 @@ final class GeminiController extends Controller
 
             // Update assignment with extracted data
             $assignment->update([
-                'ends_at' => $data['deadline'] ?? now()->addWeek(),
+                'ends_at' => $data['deadline'] ?? today()->addWeek(),
                 'priority' => $data['priority'] ?? 'medium',
             ]);
 
@@ -72,7 +72,7 @@ final class GeminiController extends Controller
 
             Log::info(sprintf('Assignment %s analyzed successfully', $assignment->id), [
                 'tasks_count' => count($data['tasks']),
-                'deadline' => $data['deadline'] ?? null,
+                'deadline' => $data['deadline'] ?? today()->addWeek(),
             ]);
 
             DB::commit();
