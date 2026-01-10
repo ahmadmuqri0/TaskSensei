@@ -38,6 +38,7 @@ final class GeminiController extends Controller
             // Call Gemini API
             $prompt = $this->buildPrompt();
 
+            // Prompt to gemini
             $response = Gemini::generativeModel(model: 'gemini-3-flash-preview')
                 ->generateContent([
                     $prompt,
@@ -54,7 +55,7 @@ final class GeminiController extends Controller
 
             // dd($data);
 
-            // Update assignment with extracted data
+            // Create assignment with extracted data
             $assignment->update([
                 'ends_at' => $data['deadline'] ?? today()->addWeek(),
                 'priority' => $data['priority'] ?? 'medium',
